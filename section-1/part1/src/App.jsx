@@ -4,7 +4,7 @@ const Header = (props) => {
     <>
       <div>
 
-        <h1>{props.title}</h1>
+        <h1>{props.title.name}</h1>
 
       </div>
     </>
@@ -17,9 +17,9 @@ const Content = (props) => {
     <>
       <div>
 
-        <Part part={props.info[0].part} exercise={props.info[0].exercises}/>
-        <Part part={props.info[1].part} exercise={props.info[1].exercises}/>
-        <Part part={props.info[2].part} exercise={props.info[2].exercises}/>
+        <Part part={props.info.parts[0].name} exercise={props.info.parts[0].exercises}/>
+        <Part part={props.info.parts[1].name} exercise={props.info.parts[1].exercises}/>
+        <Part part={props.info.parts[2].name} exercise={props.info.parts[2].exercises}/>
 
       </div>
     </>
@@ -32,7 +32,7 @@ const Total = (props) => {
     <>
     <div>
 
-      <p>Number of exercises {props.numbers[0] + props.numbers[1] + props.numbers[2]}</p>
+      <p>Number of exercises {props.numbers.parts[0].exercises + props.numbers.parts[1].exercises + props.numbers.parts[2].exercises}</p>
 
     </div>
     </>
@@ -55,28 +55,32 @@ const Part = (props) => {
 
 const App = () => {
 
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-
-  const data = [
-  {part:part1, exercises:exercises1},
-  {part:part2, exercises:exercises2},
-  {part:part3, exercises:exercises3}
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
   return (
     <>
       <div>
       <Header title = {course}/>
 
-      <Content info = {data}/>
+      <Content info = {course}/>
 
-      <Total numbers={[exercises1, exercises2, exercises3]}/>
+      <Total numbers={course}/>
 
       </div>
     </>
